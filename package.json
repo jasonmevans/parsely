@@ -8,9 +8,17 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "prepare": "simple-git-hooks",
     "build": "tauque && yarn build:types",
-    "build:types": "tsc -b",
-    "dev": "build --dev"
+    "build:types": "tsc",
+    "dev": "build --dev",
+    "typecheck": "yarn build:types --noEmit"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "yarn lint-staged"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": "yarn typecheck"
   },
   "devDependencies": {
     "@eslint/css": "^0.14.1",
@@ -23,8 +31,10 @@
     "eslint-plugin-react": "^7.37.5",
     "globals": "^17.3.0",
     "jest": "^30.2.0",
+    "lint-staged": "^16.2.7",
     "prettier": "^3.8.1",
     "prettier-eslint": "^16.4.2",
+    "simple-git-hooks": "^2.13.1",
     "tauque": "^1.5.1",
     "ts-jest": "^29.4.6",
     "typescript": "^5.9.3",
