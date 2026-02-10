@@ -1,12 +1,12 @@
 {
   "name": "parsely",
   "version": "0.0.1",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
   "author": "Jason Evans <505818+jasonmevans@users.noreply.github.com>",
   "license": "MIT",
   "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tauque && build:types",
     "build:types": "tsc -b",
@@ -17,13 +17,16 @@
     "@eslint/js": "^9.39.2",
     "@eslint/json": "^1.0.0",
     "@eslint/markdown": "^7.5.1",
+    "@types/jest": "^30.0.0",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react": "^7.37.5",
     "globals": "^17.3.0",
+    "jest": "^30.2.0",
     "prettier": "^3.8.1",
     "prettier-eslint": "^16.4.2",
     "tauque": "^1.5.1",
+    "ts-jest": "^29.4.6",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.54.0"
   }
