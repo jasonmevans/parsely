@@ -8,7 +8,7 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tauque && build:types",
+    "build": "tauque && yarn build:types",
     "build:types": "tsc -b",
     "dev": "build --dev"
   },
