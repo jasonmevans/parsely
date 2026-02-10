@@ -11,8 +11,11 @@
     "prepare": "simple-git-hooks",
     "build": "tauque && yarn build:types",
     "build:types": "tsc",
+    "test": "jest",
+    "test:watch": "NODE_OPTIONS=\"--no-webstorage\" jest --watch",
     "dev": "build --dev",
-    "typecheck": "yarn build:types --noEmit"
+    "typecheck": "build:types --noEmit",
+    "typecheck:watch": "typecheck --watch"
   },
   "simple-git-hooks": {
     "pre-commit": "yarn lint-staged"
