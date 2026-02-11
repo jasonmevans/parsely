@@ -1,8 +1,8 @@
 type Input = string;
 
 type ParseResult<A> =
-  | { success: true; value: A; remaining: Input }
-  | { success: false; error: string };
+  | { success: true; value: A; remaining: Input; original: Input }
+  | { success: false; error: string; original: Input };
 
 type Parser<A> = (input: Input) => ParseResult<A>;
 
@@ -14,6 +14,7 @@ export const str =
         success: true,
         value: expected,
         remaining: input.slice(expected.length),
+        original: input,
       };
     }
 
@@ -21,6 +22,7 @@ export const str =
     return {
       success: false,
       error: `Expected "${expected}", but received "${received}"`,
+      original: input,
     };
   };
 

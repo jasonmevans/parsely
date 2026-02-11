@@ -8,16 +8,19 @@ describe('str', () => {
       success: true,
       value: 'Hello world!',
       remaining: '',
+      original: 'Hello world!',
     });
 
     expect(run(parser, 'Goodbye world!')).toMatchObject({
       success: false,
       error: expect.stringContaining(`"Goodbye worl"`),
+      original: 'Goodbye world!',
     });
 
     expect(run(parser, '')).toMatchObject({
       success: false,
       error: expect.stringContaining(`"<end of input>"`),
+      original: '',
     });
   });
 });
