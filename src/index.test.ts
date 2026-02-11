@@ -1,15 +1,23 @@
 import { run, str } from './';
 
-describe('Basic string parsers', () => {
+describe('str', () => {
   it('should match a string', () => {
-    const parser = str('Hello there!');
+    const parser = str('Hello world!');
 
-    expect(() => run(parser, 'This is not correct')).toThrow();
+    expect(run(parser, 'Hello world!')).toMatchObject({
+      success: true,
+      value: 'Hello world!',
+      remaining: '',
+    });
 
-    expect(run(parser, 'Hello there!')).toStrictEqual({
-      target: 'Hello there!',
-      result: 'Hello there!',
-      index: 12,
+    expect(run(parser, 'Goodbye world!')).toMatchObject({
+      success: false,
+      error: expect.stringContaining(`"Goodbye worl"`),
+    });
+
+    expect(run(parser, '')).toMatchObject({
+      success: false,
+      error: expect.stringContaining(`"<end of input>"`),
     });
   });
 });

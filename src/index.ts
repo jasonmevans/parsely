@@ -1,37 +1,29 @@
-export type ParserState<T> = {
-  target: T;
-  result: T | null;
-  index: number;
-};
-export type Parser<T> = (
-  input: T
-) => (parserState: ParserState<T>) => ParserState<T>;
+type Input = string;
 
-export const str: Parser<string> = (s) => (parserState) => {
-  const { target, index } = parserState;
+type ParseResult<A> =
+  | { success: true; value: A; remaining: Input }
+  | { success: false; error: string };
 
-  if (target.slice(index).startsWith(s)) {
+type Parser<A> = (input: Input) => ParseResult<A>;
+
+export const str =
+  (expected: string): Parser<string> =>
+  (input: Input) => {
+    if (input.startsWith(expected)) {
+      return {
+        success: true,
+        value: expected,
+        remaining: input.slice(expected.length),
+      };
+    }
+
+    const received = input.slice(0, expected.length) || '<end of input>';
     return {
-      ...parserState,
-      result: s,
-      index: index + s.length,
+      success: false,
+      error: `Expected "${expected}", but received "${received}"`,
     };
-  }
-
-  throw new Error(
-    `Tried to match "${s}", but got "${target.substring(index, index + s.length)}"`
-  );
-};
-
-export const run = <T>(
-  parser: ReturnType<Parser<T>>,
-  target: T
-): ParserState<T> => {
-  const initialState = {
-    target,
-    result: null,
-    index: 0,
   };
 
-  return parser(initialState);
+export const run = <A>(parser: Parser<A>, input: Input): ParseResult<A> => {
+  return parser(input);
 };
