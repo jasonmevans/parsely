@@ -65,10 +65,12 @@ type InferParserTuple<T extends Parser<any>[]> = {
 };
 
 export const sequenceOf =
-  <P extends Parser<any>[]>(parsers: P): Parser<InferParserTuple<P>> =>
+  <P extends [Parser<any>, ...Parser<any>[]]>(
+    parsers: P
+  ): Parser<InferParserTuple<P>> =>
   (input: Input) => {
     let remaining = input;
-    const values = [] as any[];
+    const values = [];
 
     for (const parser of parsers) {
       const result = parser(remaining);

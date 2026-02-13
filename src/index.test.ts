@@ -62,9 +62,7 @@ describe('sequenceOf', () => {
   it('should process a sequence of parsers', () => {
     const parser = sequenceOf([str('Hello '), num(4), str(' world!')]);
 
-    const result = run(parser, 'Hello 4 world!');
-
-    expect(result).toMatchObject({
+    expect(run(parser, 'Hello 4 world!')).toMatchObject({
       success: true,
       value: ['Hello ', 4, ' world!'],
       remaining: '',
