@@ -66,7 +66,7 @@ type InferParserTuple<T extends Parser<any>[]> = {
 
 export const sequenceOf =
   <P extends [Parser<any>, ...Parser<any>[]]>(
-    parsers: P
+    ...parsers: P
   ): Parser<InferParserTuple<P>> =>
   (input: Input) => {
     let remaining = input;
