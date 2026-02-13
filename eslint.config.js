@@ -21,7 +21,12 @@ export default defineConfig([
       },
     },
   },
-  tseslint.configs.recommended,
+  {
+    extends: [tseslint.configs.recommended],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'warn',
+    },
+  },
   pluginReact.configs.flat.recommended,
   {
     files: ['**/*.json'],
